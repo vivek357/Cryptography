@@ -1,0 +1,97 @@
+#1. To compile code
+	$ gcc feistal_cipher.c -o fe
+#2. To execute
+	$ ./fe
+
+
+SAMPLE OUTPUT For case 1 default case:
+###############################################################################
+
+Enter your choice
+1. for default plain text : 0x7E81817E
+2. for standard input
+1
+plain_text hex = 0x7E81817E
+left hex = 0x7E81
+right hex = 0x817E
+Round = 0 str = 0x60937E81
+Round = 1 str = 0xF4656093
+Round = 2 str = 0xE44CF465
+Round = 3 str = 0x4CBDE44C
+Round = 4 str = 0x1CBF4CBD
+Round = 5 str = 0x93BC1CBF
+Round = 6 str = 0x8BAF93BC
+Round = 7 str = 0x8BAF7A76
+cipher text hex = 0x8BAF7A76
+
+-----------------Decrypt Cipher text-----------------
+left hex = 0x8BAF
+right hex = 0x7A76
+Round = 0 str = 0x93BC8BAF
+Round = 1 str = 0x1CBF93BC
+Round = 2 str = 0x4CBD1CBF
+Round = 3 str = 0xE44C4CBD
+Round = 4 str = 0xF465E44C
+Round = 5 str = 0x6093F465
+Round = 6 str = 0x7E816093
+Round = 7 str = 0x7E81817E
+Decoded Plain text hex = 0x7E81817E
+
+-----------------HD[u(i),v(i)]-----------------
+Round = 0, Hamming_Distance(0x60937E81, 0x93BC8BAF) = 21
+Round = 1, Hamming_Distance(0xF4656093, 0x1CBF93BC) = 20
+Round = 2, Hamming_Distance(0xE44CF465, 0x4CBD1CBF) = 17
+Round = 3, Hamming_Distance(0x4CBDE44C, 0xE44C4CBD) = 16
+Round = 4, Hamming_Distance(0x1CBF4CBD, 0xF465E44C) = 17
+Round = 5, Hamming_Distance(0x93BC1CBF, 0x6093F465) = 20
+Round = 6, Hamming_Distance(0x8BAF93BC, 0x7E816093) = 21
+Round = 7, Hamming_Distance(0x8BAF7A76, 0x7E81817E) = 18
+
+Final Hamming_Distance(plain_text, cipher_text) = 18
+
+###############################################################################
+Sample Output for user input case:
+
+Enter your choice
+1. for default plain text : 0x7E81817E
+2. for standard input
+2
+Enter the 32 bit pain text in Hexadecimal form: 0x4CBD1CBF
+plain_text hex = 0x4CBD1CBF
+left hex = 0x4CBD
+right hex = 0x1CBF
+Round = 0 str = 0xE44C4CBD
+Round = 1 str = 0x8436E44C
+Round = 2 str = 0x58BA8436
+Round = 3 str = 0x629558BA
+Round = 4 str = 0xB75D6295
+Round = 5 str = 0xE865B75D
+Round = 6 str = 0x1DA1E865
+Round = 7 str = 0x1DA14AA8
+cipher text hex = 0x1DA14AA8
+
+-----------------Decrypt Cipher text-----------------
+left hex = 0x1DA1
+right hex = 0x4AA8
+Round = 0 str = 0xE8651DA1
+Round = 1 str = 0xB75DE865
+Round = 2 str = 0x6295B75D
+Round = 3 str = 0x58BA6295
+Round = 4 str = 0x843658BA
+Round = 5 str = 0xE44C8436
+Round = 6 str = 0x4CBDE44C
+Round = 7 str = 0x4CBD1CBF
+Decoded Plain text hex = 0x4CBD1CBF
+
+-----------------HD[u(i),v(i)]-----------------
+Round = 0, Hamming_Distance(0xE44C4CBD, 0xE8651DA1) = 11
+Round = 1, Hamming_Distance(0x8436E44C, 0xB75DE865) = 14
+Round = 2, Hamming_Distance(0x58BA8436, 0x6295B75D) = 18
+Round = 3, Hamming_Distance(0x629558BA, 0x58BA6295) = 18
+Round = 4, Hamming_Distance(0xB75D6295, 0x843658BA) = 18
+Round = 5, Hamming_Distance(0xE865B75D, 0xE44C8436) = 14
+Round = 6, Hamming_Distance(0x1DA1E865, 0x4CBDE44C) = 11
+Round = 7, Hamming_Distance(0x1DA14AA8, 0x4CBD1CBF) = 14
+
+Final Hamming_Distance(plain_text, cipher_text) = 14
+

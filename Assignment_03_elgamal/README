@@ -1,0 +1,39 @@
+Folder contains two implementations:
+###########################################
+###########################################
+
+1:  first for int64 large numbers (with one file)
+	files : generic_elgamal.c
+
+    To Compile:
+		$ gcc generic_elgamal.c -o elgamal -lm
+    To Run:
+		$ ./elgamal
+
+    This solution is fully functioning 
+
+###############################################################################
+
+2: Tried to Implement for big_int1024 (1024 bit number)
+	files : 
+	  Big Integer Arithmatic libraries consists of following files
+		- big_int1024.c
+		- big_int1024.h		// contains big Integer Arithmatic functions
+	  
+	  Elgamal Algorithm driver (main/test) code:
+		- elgamal.c
+
+    ## And one Makefile to compile and clean 
+
+	To Compile:
+		$ make all
+
+	To Run:
+		$ ./big_elgamal.out
+
+	To clean:
+		$ make clean
+
+
+  I have tested out the big integer Arithmatic, working good with minor bugs.
+  Tried to implement the elgamal DSA system for 1024 bits (Partially completed)

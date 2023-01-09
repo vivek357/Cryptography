@@ -1,0 +1,12 @@
+Reuiqred GCC compiler to execute the code
+Steps as given below
+
+#1.	To compile the code for substition cipher
+		$ gcc shift_cipher.c -o shift_cipher
+	To Run the generated excutable
+		$ ./shift_cipher
+
+#2.	To compile the code for substition cipher
+		$ gcc substitution_cipher.c -o subs
+	To Run the generated excutable
+		$ ./subs

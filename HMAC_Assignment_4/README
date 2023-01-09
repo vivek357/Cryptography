@@ -1,0 +1,57 @@
+HMAC Implementation using SHA256 and MD5
+###############################################################################
+
+Two Files are there:
+	1. hmac_ssl.c : contains implementation of HMAC using Openssl API's
+			for SHA256 and MD5
+	2. Makefile
+
+
+To Compile the code:
+--------------------
+	$ make all     //hmac.out executable will be created		
+
+To clean the executable:
+-----------------------
+	$ make clean
+
+
+To Run the executable:
+----------------------
+	$ ./hmac.out <KEY>
+	
+		e.g.,:
+		./hmac.out cs22m527
+		where  key = cs22m527
+
+
+###############################################################################
+
+NOTE: Following program uses OpenSLL packages for SHA256 and MD5 Hash:
+	To install the package if already not there run:
+
+	$ sudo apt-get install libssl-dev
+
+###############################################################################
+
+SAMPLE OUTPUT:
+---------------
+
+$ ./hmac.out cs22m527
+
+------------HMAC WITH SHA256 -------------
+Enter the message Buffer
+thisissparta
+
+Generated HMAC using SHA256
+19c91bdeb62452337f1f42ecb53910dee7e78a662efda6d58887aeb0a4925645
+
+
+---------------HMAC WITH MD5 -------------
+Enter the message Buffer
+dieanotherday
+
+Generated HMAC using MD5
+1429d7068ed9832f989772b2d3eb11a3e7e78a662efda6d58887aeb0a4925645
+
+
