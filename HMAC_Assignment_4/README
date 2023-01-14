@@ -1,57 +1,66 @@
-HMAC Implementation using SHA256 and MD5
-###############################################################################
-
-Two Files are there:
-	1. hmac_ssl.c : contains implementation of HMAC using Openssl API's
-			for SHA256 and MD5
-	2. Makefile
-
-
-To Compile the code:
---------------------
-	$ make all     //hmac.out executable will be created		
-
-To clean the executable:
------------------------
-	$ make clean
-
-
-To Run the executable:
-----------------------
-	$ ./hmac.out <KEY>
+MAC: Message Authentication Code
+--------------------------------
 	
-		e.g.,:
-		./hmac.out cs22m527
-		where  key = cs22m527
+	
+	A  <-----------------> B (share a key)
+
+	f : {0,1} ^ 768  --->  {0,1} ^ 256 
+
+	|b| = 256, 512 ...		M = y0y1y2y3....
+
+	|IV| = 256	IV || y0 --> f1
+			IV || y1 --> f2
+			IV || y2 --> f3
+				.
+				.	
+				.
+
+	MAC = C(k,M)     where k = key,  M = message, MAC = Digital Checksum
+
+	which will give only Authentication and intergrity (No Confidentiality)
+	This Hash based MAC is termed as HMAC
+
+	HMAC, a schema in which HASH FUNCTION is going to be used to produce the 	digital checksum or the MAC (NIST STD FIPS5198)
+
+# H : Embedded Hash Function (e.g., MD5, SHA-3, RIPEMD160,...)
+
+	(H --> IV,f) where 
+		IV = Initial Vector,
+		f = Compression Function,
+		M = Message (including the pad)
+		yi = ith block (M = y0y1y2...yl-1)
+		l = Number of blocks in m
+		b = block size   (for SHA b = 512, n = 256)
+		n = output lenght of H
+		k = secret key  |k| >= n
+
+	ipad (inner pad)  0x36 in hex repeated b/8 times
+		of size b (block size)
+
+		==> b/8 copies ==> |ipad| = b
+			e.g., 256/8 = 32 is b = 256
+
+	opad (outer pad) 0x5c in Hex, b/8 times repeated
 
 
-###############################################################################
+	k+ = is the k padded to its left with zeroes so that |k+| = b
 
-NOTE: Following program uses OpenSLL packages for SHA256 and MD5 Hash:
-	To install the package if already not there run:
-
-	$ sudo apt-get install libssl-dev
-
-###############################################################################
-
-SAMPLE OUTPUT:
----------------
-
-$ ./hmac.out cs22m527
-
-------------HMAC WITH SHA256 -------------
-Enter the message Buffer
-thisissparta
-
-Generated HMAC using SHA256
-19c91bdeb62452337f1f42ecb53910dee7e78a662efda6d58887aeb0a4925645
+Algorithm:
+#############
 
 
----------------HMAC WITH MD5 -------------
-Enter the message Buffer
-dieanotherday
+1.  find (k+ XOR ipad) and get Si  (starting block of inner call)
+	=> Si = (k+ XOR ipad)
 
-Generated HMAC using MD5
-1429d7068ed9832f989772b2d3eb11a3e7e78a662efda6d58887aeb0a4925645
+2.  Append M to Si ; i.e., stream of data Msg M to SHA256 Block Size for our eg
+3.  Apply H to the data stream generated of step 2
 
+4.  S0 = k+ XOR opad (starting block of outer call) 
+5.  Apply H to compute H [S0 || h] and output the result.
+
+	
+	MAC = H [ (k+ XOR opad ) || H [ K+ || ipad || M ] ]
+	      outer Hash	    inner Hash
+		
+	
 
